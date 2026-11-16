@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-outfit-src), ui-sans-serif, system-ui, sans-serif;
+  --color-page: #f6faff;
+  /* paste your hex here */
+  --color-ink: #262626;
+  --color-muted: #7c7c7c;
+  --color-line: #ededed;
+}
+
+body {
+  background: var(--color-page);
+  color: #000;
+}
+
+@utility container-x {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1474px;
+  padding-inline: 1.25rem;
+
+  @media (min-width: 768px) {
+    padding-inline: 2rem;
+  }
+}
+
+@utility btn-grad {
+  background: linear-gradient(90deg, #7648ff 0%, #d34af8 100%);
+}
+
+@utility text-grad-brand {
+  background: linear-gradient(90deg, #7648ff 0%, #d34af8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility title-grad {
+  background: linear-gradient(90deg, #353535 7.17%, #9b9b9b 92.89%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility card-shadow {
+  box-shadow: 0px 4px 15px 0px #0000000d;
+}

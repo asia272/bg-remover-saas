@@ -1,0 +1,86 @@
+generator client {
+    provider = "prisma-client"
+    output   = "../app/generated/prisma"
+}
+
+datasource db {
+    provider = "postgresql"
+}
+
+enum Plan {
+    FREE
+    MONTHLY
+    YEARLY
+}
+
+enum SubscriptionStatus {
+    ACTIVE
+    TRIALING
+    PAST_DUE
+    CANCELED
+    INCOMPLETE
+}
+
+enum JobStatus {
+    SUCCESS
+    FAILED
+}
+
+model User {
+    id       String  @id @default(cuid())
+    clerkId  String  @unique
+    email    String  @unique
+    name     String?
+    imageUrl String?
+
+    // Free trial: every new user starts with 5 credits
+    credits Int @default(5)
+
+    plan             Plan    @default(FREE)
+    stripeCustomerId String? @unique
+
+    subscription Subscription?
+    jobs         ImageJob[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Subscription {
+    id     String @id @default(cuid())
+    userId String @unique
+    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    stripeSubscriptionId String             @unique
+    stripePriceId        String
+    status               SubscriptionStatus
+    currentPeriodEnd     DateTime
+    cancelAtPeriodEnd    Boolean            @default(false)
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+// One row per background-removal attempt (usage history + abuse tracking)
+model ImageJob {
+    id     String @id @default(cuid())
+    userId String
+    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    status       JobStatus
+    originalName String?
+    sizeBytes    Int?
+    creditUsed   Boolean   @default(false)
+    errorMessage String?
+
+    createdAt DateTime @default(now())
+
+    @@index([userId, createdAt])
+}
+
+// Stripe can send the same webhook twice. Store event IDs to ignore repeats.
+model StripeEvent {
+    id          String   @id // Stripe event id (evt_...)
+    type        String
+    processedAt DateTime @default(now())
+}
