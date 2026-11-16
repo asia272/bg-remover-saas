@@ -32,7 +32,7 @@ export default function ResultPage() {
                     <div>
                         <p className="mb-4 text-sm font-semibold text-[#333]">Background Removed</p>
                         <div className="relative aspect-[16/10] overflow-hidden rounded-md border border-gray-300">
-                            <Image src="/assets/bg_layer.png" alt="" fill className="object-cover" />
+                            <Image src="/assets/bg_layer.png" alt="" fill sizes="(max-width: 1024px) 100vw, 1000px" className="object-cover" />
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img src={result} alt="Background removed" className="absolute inset-0 size-full object-contain" />
                         </div>

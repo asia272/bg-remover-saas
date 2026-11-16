@@ -30,7 +30,16 @@ export async function POST(req: Request) {
   if (file.size > MAX_SIZE) {
     return NextResponse.json({ error: "TOO_LARGE", message: "Image must be under 4MB." }, { status: 400 });
   }
-
+  // Basic rate limit: max 6 requests per minute per user.
+  const recent = await prisma.imageJob.count({
+    where: { userId: user.id, createdAt: { gt: new Date(Date.now() - 60_000) } },
+  });
+  if (recent >= 6) {
+    return NextResponse.json(
+      { error: "RATE_LIMITED", message: "Too many requests. Please wait a minute and try again." },
+      { status: 429 }
+    );
+  }
   // Atomic: take 1 credit only if the user has at least 1 (no double-spend).
   const claimed = await prisma.user.updateMany({
     where: { id: user.id, credits: { gt: 0 } },

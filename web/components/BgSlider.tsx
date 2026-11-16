@@ -14,12 +14,12 @@ export default function BgSlider() {
 
       <div className="relative mx-auto mt-12 aspect-[16/10] w-full max-w-[1000px] select-none overflow-hidden rounded-2xl">
         {/* Right side: transparent result on checkerboard */}
-        <Image src="/assets/bg_layer.png" alt="" fill className="object-cover" />
-        <Image src="/assets/image_wo_bg.png" alt="Background removed" fill className="object-cover" />
+        <Image src="/assets/bg_layer.png" alt="" fill sizes="(max-width: 1024px) 100vw, 1000px" className="object-cover" />
+        <Image src="/assets/image_wo_bg.png" alt="Background removed" fill sizes="(max-width: 1024px) 100vw, 1000px" className="object-cover" />
 
         {/* Left side: original, clipped by slider */}
         <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
-          <Image src="/assets/image_w_bg.png" alt="Original" fill className="object-cover" />
+          <Image src="/assets/image_w_bg.png" alt="Original" fill sizes="(max-width: 1024px) 100vw, 1000px" className="object-cover" />
         </div>
 
         {/* Divider + handle */}
