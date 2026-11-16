@@ -400,7 +400,8 @@ export const ModelName = {
   User: 'User',
   Subscription: 'Subscription',
   ImageJob: 'ImageJob',
-  StripeEvent: 'StripeEvent'
+  StripeEvent: 'StripeEvent',
+  CreditPurchase: 'CreditPurchase'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -416,7 +417,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "subscription" | "imageJob" | "stripeEvent"
+    modelProps: "user" | "subscription" | "imageJob" | "stripeEvent" | "creditPurchase"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -716,6 +717,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    CreditPurchase: {
+      payload: Prisma.$CreditPurchasePayload<ExtArgs>
+      fields: Prisma.CreditPurchaseFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CreditPurchaseFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CreditPurchasePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CreditPurchaseFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CreditPurchasePayload>
+        }
+        findFirst: {
+          args: Prisma.CreditPurchaseFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CreditPurchasePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CreditPurchaseFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CreditPurchasePayload>
+        }
+        findMany: {
+          args: Prisma.CreditPurchaseFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CreditPurchasePayload>[]
+        }
+        create: {
+          args: Prisma.CreditPurchaseCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CreditPurchasePayload>
+        }
+        createMany: {
+          args: Prisma.CreditPurchaseCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CreditPurchaseCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CreditPurchasePayload>[]
+        }
+        delete: {
+          args: Prisma.CreditPurchaseDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CreditPurchasePayload>
+        }
+        update: {
+          args: Prisma.CreditPurchaseUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CreditPurchasePayload>
+        }
+        deleteMany: {
+          args: Prisma.CreditPurchaseDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CreditPurchaseUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CreditPurchaseUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CreditPurchasePayload>[]
+        }
+        upsert: {
+          args: Prisma.CreditPurchaseUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CreditPurchasePayload>
+        }
+        aggregate: {
+          args: Prisma.CreditPurchaseAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCreditPurchase>
+        }
+        groupBy: {
+          args: Prisma.CreditPurchaseGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CreditPurchaseGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CreditPurchaseCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CreditPurchaseCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -807,6 +882,20 @@ export const StripeEventScalarFieldEnum = {
 } as const
 
 export type StripeEventScalarFieldEnum = (typeof StripeEventScalarFieldEnum)[keyof typeof StripeEventScalarFieldEnum]
+
+
+export const CreditPurchaseScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  stripeSessionId: 'stripeSessionId',
+  packId: 'packId',
+  credits: 'credits',
+  amountCents: 'amountCents',
+  currency: 'currency',
+  createdAt: 'createdAt'
+} as const
+
+export type CreditPurchaseScalarFieldEnum = (typeof CreditPurchaseScalarFieldEnum)[keyof typeof CreditPurchaseScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1098,6 +1187,7 @@ export type GlobalOmitConfig = {
   subscription?: Prisma.SubscriptionOmit
   imageJob?: Prisma.ImageJobOmit
   stripeEvent?: Prisma.StripeEventOmit
+  creditPurchase?: Prisma.CreditPurchaseOmit
 }
 
 /* Types for Logging */

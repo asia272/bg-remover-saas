@@ -54,7 +54,8 @@ export const ModelName = {
   User: 'User',
   Subscription: 'Subscription',
   ImageJob: 'ImageJob',
-  StripeEvent: 'StripeEvent'
+  StripeEvent: 'StripeEvent',
+  CreditPurchase: 'CreditPurchase'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -125,6 +126,20 @@ export const StripeEventScalarFieldEnum = {
 } as const
 
 export type StripeEventScalarFieldEnum = (typeof StripeEventScalarFieldEnum)[keyof typeof StripeEventScalarFieldEnum]
+
+
+export const CreditPurchaseScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  stripeSessionId: 'stripeSessionId',
+  packId: 'packId',
+  credits: 'credits',
+  amountCents: 'amountCents',
+  currency: 'currency',
+  createdAt: 'createdAt'
+} as const
+
+export type CreditPurchaseScalarFieldEnum = (typeof CreditPurchaseScalarFieldEnum)[keyof typeof CreditPurchaseScalarFieldEnum]
 
 
 export const SortOrder = {

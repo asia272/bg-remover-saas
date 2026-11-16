@@ -17,9 +17,9 @@ New users get 5 free credits, and more credits are bought through Stripe.
 **Python service**
     cd bg-service && python3 -m venv .venv && source .venv/bin/activate
     pip install -r requirements.txt
-    API_SECRET=local-dev-secret uvicorn app:app --port 8000
+    API_SECRET=example-dev-secret uvicorn app:app --port 8000
 
-**Web app** (copy `web/.env.example` to `web/.env` and fill in the values)
+**Web app*
     cd web && npm install && npx prisma migrate dev && npm run dev
 
 

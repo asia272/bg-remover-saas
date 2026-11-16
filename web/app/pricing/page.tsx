@@ -1,10 +1,8 @@
+import { Suspense } from "react";
 import Image from "next/image";
-
-const plans = [
-  { name: "Basic", desc: "Best for personal use.", price: 10, credits: 100, cta: "Get started" },
-  { name: "Advanced", desc: "Best for business use.", price: 50, credits: 500, cta: "Get started" },
-  { name: "Business", desc: "Best for enterprise use.", price: 250, credits: 5000, cta: "Purchase" },
-];
+import BuyButton from "@/components/BuyButton";
+import PaymentBanner from "@/components/PaymentBanner";
+import { PACKS } from "@/lib/packs";
 
 export default function PricingPage() {
   return (
@@ -16,23 +14,24 @@ export default function PricingPage() {
         Choose the plan that&apos;s right for you
       </h1>
 
+      <Suspense fallback={null}>
+        <PaymentBanner />
+      </Suspense>
+
       <div className="mx-auto mt-12 grid max-w-[1200px] justify-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {plans.map((p) => (
+        {PACKS.map((p) => (
           <div
-            key={p.name}
+            key={p.id}
             className="mx-auto flex min-h-[434px] w-full max-w-[363px] flex-col rounded-[30px] border border-line bg-white p-8 text-left shadow-[0px_2px_2px_0px_#00000014]"
           >
             <Image src="/assets/logo_icon.svg" alt="" width={32} height={32} className="size-8" />
             <p className="mt-6 text-base font-medium text-black">{p.name}</p>
             <p className="mt-1 text-xs text-[#555]">{p.desc}</p>
             <p className="mt-6 flex items-baseline gap-2">
-              <span className="text-[40px] font-medium leading-none text-[#333]">${p.price}</span>
+              <span className="text-[40px] font-medium leading-none text-[#333]">${p.priceCents / 100}</span>
               <span className="text-xs text-[#555]">/ {p.credits} credits</span>
             </p>
-            {/* Next step: wire this to /api/checkout (Stripe) */}
-            <button className="mt-auto h-[55px] w-full rounded-[10px] bg-ink text-sm font-medium text-white transition hover:bg-black">
-              {p.cta}
-            </button>
+            <BuyButton packId={p.id} label={p.cta} />
           </div>
         ))}
       </div>

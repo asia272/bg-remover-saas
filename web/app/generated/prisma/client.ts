@@ -61,3 +61,8 @@ export type ImageJob = Prisma.ImageJobModel
  * 
  */
 export type StripeEvent = Prisma.StripeEventModel
+/**
+ * Model CreditPurchase
+ * 
+ */
+export type CreditPurchase = Prisma.CreditPurchaseModel
