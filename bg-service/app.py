@@ -8,7 +8,7 @@ from rembg import new_session, remove
 app = FastAPI()
 
 # The AI model loads once when the server starts.
-session = new_session("isnet-general-use")
+session = new_session(os.getenv("MODEL_NAME", "u2netp"))
 
 SECRET = os.getenv("API_SECRET", "")
 MAX_BYTES = 5 * 1024 * 1024

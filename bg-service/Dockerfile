@@ -1,19 +1,14 @@
 FROM python:3.11-slim
 
-RUN useradd -m -u 1000 user
-USER user
-ENV HOME=/home/user
-ENV PATH="/home/user/.local/bin:$PATH"
-WORKDIR /home/user/app
+WORKDIR /app
 
-COPY --chown=user requirements.txt .
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Download the AI model while building, so the first request isn't slow.
-RUN python -c "from rembg import new_session; new_session('isnet-general-use')"
+# Download the small model while building, so the first request is faster.
+ENV MODEL_NAME=u2netp
+RUN python -c "from rembg import new_session; new_session('u2netp')"
 
-COPY --chown=user app.py .
+COPY app.py .
 
-EXPOSE 7860
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "7860"]
-
+CMD ["sh", "-c", "uvicorn app:app --host 0.0.0.0 --port ${PORT:-10000}"]
