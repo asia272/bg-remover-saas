@@ -5,7 +5,7 @@
 Upload an image, remove its background with AI, and download a transparent PNG. New users get 5 free credits, and more credits can be bought with Stripe.
 
 **[Live demo](https://web-beta-seven-72.vercel.app/)** 
-
+**[Figma Design](https://www.figma.com/design/L8M1WlijFJOr18ytw5l7dP/BgRemoval---SAAS?node-id=0-1&p=f&t=o8QwEE5PoUNF1niE-0/)** 
 ## Demo Access
 
 Test mode only, no real money. You can also sign up with your own email and get 5 free credits.
